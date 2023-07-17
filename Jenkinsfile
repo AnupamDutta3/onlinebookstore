@@ -1,11 +1,9 @@
 pipeline{
     agent any
 
-    stages{
-       stage('Git Checkout'){
-            steps{
-                git branch: 'master', https://github.com/AnupamDutta3/onlinebookstore.git'
-            }
+    stage('SCM') {
+    checkout scm
+  }
          }        
        stage('Build'){
             steps{
