@@ -4,7 +4,7 @@ pipeline{
     stages{
        stage('Git Checkout'){
             steps{
-                git branch: 'master', https://github.com/AnupamDutta3/simple-java-maven-app.git'
+                git branch: 'master', https://github.com/AnupamDutta3/onlinebookstore.git'
             }
          }        
        stage('Build'){
