@@ -62,11 +62,10 @@ pipeline {
         stage('Code Coverage') {
             steps {
                 sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test'
-                // This assumes you are using Maven. If you are using a different build tool,
-                // replace the command accordingly.
-                
-                // Generate code coverage report
+               
                 sh 'mvn org.jacoco:jacoco-maven-plugin:report'
+
+                sh 'mvn sonar:sonar -Dsonar.projectKey=onlinebookstore:onlinebookstore'
                 
             }
         }
