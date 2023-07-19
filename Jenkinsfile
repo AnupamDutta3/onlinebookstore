@@ -65,7 +65,7 @@ pipeline {
                
                 sh 'mvn org.jacoco:jacoco-maven-plugin:report'
 
-                sh 'mvn sonar:sonar -Dsonar.projectKey=onlinebookstore:onlinebookstore'
+                sh 'mvn sonar:sonar'
                 
             }
         }
