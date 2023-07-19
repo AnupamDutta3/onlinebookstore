@@ -67,10 +67,10 @@
             </goals>
           </execution>
 		<execution>
-            <id>report</id>
+            <id>test</id>
             <phase>test</phase>
             <goals>
-              <goal>report</goal>
+              <goal>test</goal>
             </goals>
           </execution>
         </executions>
