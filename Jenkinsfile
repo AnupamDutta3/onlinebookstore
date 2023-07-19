@@ -70,7 +70,7 @@ pipeline {
                 sh 'mvn org.jacoco:jacoco-maven-plugin:report'
                 
                 // Publish code coverage results to SonarQube
-                withSonarQubeEnv('SonarQubeServer') {
+                withSonarQubeEnv('SonarQube') {
                     sh 'mvn sonar:sonar'
                 }
             }
