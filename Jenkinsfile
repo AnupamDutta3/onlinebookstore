@@ -19,13 +19,13 @@ pipeline {
             }
         }
         
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar'
-                }
-            }
-        }
+    //    stage('SonarQube Analysis') {
+      //      steps {
+         //       withSonarQubeEnv('SonarQube') {
+           //         sh 'mvn sonar:sonar'
+             //   }
+            //}
+        //}
         
         stage('Publish to Artifactory') {
             steps {
@@ -40,7 +40,7 @@ pipeline {
         stage('Upload'){
             steps{
                 rtUpload (
-                 serverId:"Jfrog" ,
+                 serverId:"Jfrog",
                   spec: '''{
                    "files": [
                       {
@@ -59,14 +59,20 @@ pipeline {
                 )
             }
         }
-        stage('Code Coverage') {
+        stage('Code Coverage and SonarQube Analysis') {
             steps {
+                // Set up Jacoco for code coverage
                 sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test'
-               
-                sh 'mvn org.jacoco:jacoco-maven-plugin:report'
-
-                sh 'mvn sonar:sonar'
+                // This assumes you are using Maven. If you are using a different build tool,
+                // replace the command accordingly.
                 
+                // Generate code coverage report
+                sh 'mvn org.jacoco:jacoco-maven-plugin:report'
+                
+                // Publish code coverage results to SonarQube
+                withSonarQubeEnv('SonarQubeServer') {
+                    sh 'mvn sonar:sonar'
+                }
             }
         }
     }
