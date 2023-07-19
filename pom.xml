@@ -67,6 +67,12 @@
           </execution>
         </executions>
       </plugin>
+			<plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.9.0.2155</version>
+      </plugin>
+    </plugins>
 		</plugins>
 	</build>
 	<dependencies>
@@ -97,5 +103,17 @@
 <scope>test</scope>
 </dependency>
 	</dependencies>
+	<profiles>
+    <profile>
+      <id>sonarqube</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <!-- SonarQube server URL -->
+        <sonar.host.url>http://54.159.200.51:9000/</sonar.host.url>
+      </properties>
+    </profile>
+  </profiles>
 	
 </project>
