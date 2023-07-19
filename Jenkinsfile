@@ -71,7 +71,7 @@ pipeline {
                 
                 // Publish code coverage results to SonarQube
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar'
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=onlinebookstore:onlinebookstore'
                 }
             }
         }
