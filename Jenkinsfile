@@ -45,7 +45,7 @@ pipeline {
                    "files": [
                       {
                       "pattern": "*.war",
-                      "target": "libs-release-local/"
+                      "target": "example-repo-local/"
                       }
                             ]
                            }''',
