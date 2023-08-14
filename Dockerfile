@@ -1,2 +1,2 @@
-FROM tomcat:9
+FROM tomcat:latest
 EXPOSE 8080
