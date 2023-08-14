@@ -33,7 +33,7 @@ environment {
              //   }
             //}
         //}
-        
+     /*   
         stage('Publish to Artifactory') {
             steps {
                 rtMavenDeployer(
@@ -82,6 +82,7 @@ environment {
                 }
             }
         }
+        */
         stage('Build Docker image') {
            steps {
                 script {
