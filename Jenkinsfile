@@ -2,7 +2,7 @@ pipeline {
     agent any
   
 environment {
-        DOCKER_SERVER = 'tcp:http://3.86.148.90:2375/' // Replace with your remote Docker server address
+        DOCKER_SERVER = 'tcp:http://52.87.35.78:2375/' // Replace with your remote Docker server address
         TOMCAT_CONTAINER_NAME = 'my-tomcat-container'
         TOMCAT_IMAGE_NAME = 'tomcat:9' // Change to the appropriate Tomcat image
         ARTIFACT_NAME = 'onlinebookstore' // Replace with your artifact name
