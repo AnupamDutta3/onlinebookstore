@@ -25,14 +25,6 @@ environment {
                 sh 'mvn clean install'
             }
         }
-        
-    //    stage('SonarQube Analysis') {
-      //      steps {
-         //       withSonarQubeEnv('SonarQube') {
-           //         sh 'mvn sonar:sonar'
-             //   }
-            //}
-        //}
      
         stage('Publish to Artifactory') {
             steps {
