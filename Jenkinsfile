@@ -2,7 +2,7 @@ pipeline {
     agent any
   
 environment {
-        DOCKER_SERVER = 'http://52.87.35.78:2375/' // Replace with your remote Docker server address
+     //   DOCKER_SERVER = 'http://52.87.35.78:2375/' // Replace with your remote Docker server address
         TOMCAT_CONTAINER_NAME = 'my-tomcat-container'
         TOMCAT_IMAGE_NAME = 'tomcat:9' // Change to the appropriate Tomcat image
         ARTIFACT_NAME = 'onlinebookstore' // Replace with your artifact name
@@ -78,15 +78,19 @@ environment {
         stage('Build Docker image') {
            steps {
                 script {
-                    def dockerImage = docker.build("${ARTIFACT_NAME}:${env.BUILD_NUMBER}", "-f Dockerfile .")
-                    sh "docker -H=${DOCKER_SERVER} save -o ${ARTIFACT_NAME}_${env.BUILD_NUMBER}.tar ${ARTIFACT_NAME}:${env.BUILD_NUMBER}"
+                  def dockerImage = docker.build("${ARTIFACT_NAME}:${env.BUILD_NUMBER}", "-f Dockerfile .")
+                    sh "docker save -o ${ARTIFACT_NAME}_${env.BUILD_NUMBER}.tar ${ARTIFACT_NAME}:${env.BUILD_NUMBER}"
+                    
+                    //  def dockerImage = docker.build("${ARTIFACT_NAME}:${env.BUILD_NUMBER}", "-f Dockerfile .")
+                   // sh "docker -H=${DOCKER_SERVER} save -o ${ARTIFACT_NAME}_${env.BUILD_NUMBER}.tar ${ARTIFACT_NAME}:${env.BUILD_NUMBER}"
                 }
             }
         }
             stage('Deploy to Tomcat Container') {
             steps {
                 script {
-                    sh "docker -H=${DOCKER_SERVER} run -d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080 -v ${PWD}/${ARTIFACT_NAME}.war:/usr/local/tomcat/webapps/${ARTIFACT_NAME}.war ${TOMCAT_IMAGE_NAME}"
+                      docker.image(TOMCAT_IMAGE_NAME).run("-d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080 -v ${PWD}/${ARTIFACT_NAME}.war:/usr/local/tomcat/webapps/${ARTIFACT_NAME}.war")
+                    //sh "docker -H=${DOCKER_SERVER} run -d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080 -v ${PWD}/${ARTIFACT_NAME}.war:/usr/local/tomcat/webapps/${ARTIFACT_NAME}.war ${TOMCAT_IMAGE_NAME}"
                 }
             }
         }
