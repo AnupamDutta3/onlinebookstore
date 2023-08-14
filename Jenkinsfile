@@ -7,6 +7,9 @@ environment {
         TOMCAT_IMAGE_NAME = 'tomcat:9' // Change to the appropriate Tomcat image
         ARTIFACT_NAME = 'onlinebookstore' // Replace with your artifact name
     }
+    triggers {
+        githubPush()
+    }
   /*
      tools {
      
