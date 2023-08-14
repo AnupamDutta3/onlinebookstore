@@ -25,7 +25,7 @@ environment {
                 sh 'mvn clean install'
             }
         }
-     
+     /*
         stage('Publish to Artifactory') {
             steps {
                 rtMavenDeployer(
@@ -74,6 +74,7 @@ environment {
                 }
             }
         }
+        */
         stage('Build Docker image') {
            steps {
                 script {
