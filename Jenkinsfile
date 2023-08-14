@@ -81,6 +81,7 @@ environment {
                     sh "docker -H=${DOCKER_SERVER} save -o ${ARTIFACT_NAME}_${env.BUILD_NUMBER}.tar ${ARTIFACT_NAME}:${env.BUILD_NUMBER}"
                 }
             }
+        }
             stage('Deploy to Tomcat Container') {
             steps {
                 script {
@@ -90,5 +91,3 @@ environment {
         }
         }
     }
-    
-}
