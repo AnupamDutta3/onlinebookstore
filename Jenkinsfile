@@ -83,7 +83,7 @@ pipeline {
             steps {
                 script {
                     def DOCKER_IMAGE_NAME = 'onlinebookstore:v1'
-                    def DOCKERFILE_PATH = '/Dockerfile' // Path to your Dockerfile
+                    def DOCKERFILE_PATH = './Dockerfile' // Path to your Dockerfile
                     
                     // Build the Docker image
                     def dockerImage = docker.build(DOCKER_IMAGE_NAME, "-f ${DOCKERFILE_PATH} .")
