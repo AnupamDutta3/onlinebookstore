@@ -8,10 +8,10 @@ RUN git clone https://github.com/AnupamDutta3/onlinebookstore.git
 WORKDIR /onlinebookstore
 RUN mvn clean install
 
-FROM ubuntu:23.04 AS stage2
-WORKDIR /app/
-COPY --from=stage1 /onlinebookstore/target/onlinebookstore.war /app/
+// FROM ubuntu:23.04 AS stage2
+// WORKDIR /app/
+// COPY --from=stage1 /onlinebookstore/target/onlinebookstore.war /app/
 
-FROM tomcat:9
-COPY --from=stage1 /onlinebookstore/target/onlinebookstore.war /usr/local/tomcat/webapps/
-EXPOSE 8080
+// FROM tomcat:9
+// COPY --from=stage1 /onlinebookstore/target/onlinebookstore.war /usr/local/tomcat/webapps/
+  // EXPOSE 8080
