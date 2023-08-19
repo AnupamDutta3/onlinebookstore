@@ -1,7 +1,7 @@
 pipeline {
     agent any
   
-environment {
+//environment {
      //   DOCKER_SERVER = 'http://52.87.35.78:2375/' // Replace with your remote Docker server address
     //    TOMCAT_CONTAINER_NAME = 'my-tomcat-container'
     //    TOMCAT_IMAGE_NAME = 'tomcat:9' // Change to the appropriate Tomcat image
