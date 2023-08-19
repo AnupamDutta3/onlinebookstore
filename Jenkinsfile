@@ -94,25 +94,26 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    def DOCKER_IMAGE_NAME = 'onlinebookstore:v1'
+                  //  def DOCKER_IMAGE_NAME = 'onlinebookstore:v1'
             
-               //     def TOMCAT_IMAGE_NAME = 'tomcat:9'
-                 //   def TOMCAT_CONTAINER_NAME = 'my-tomcat-container'
-                   // def ARTIFACT_NAME = 'onlinebookstore'
+                   def TOMCAT_IMAGE_NAME = 'tomcat:9'
+                   def TOMCAT_CONTAINER_NAME = 'my-tomcat-container'
+                 def ARTIFACT_NAME = 'onlinebookstore'
                     
                     // Remove the existing container if it exists
-                 //   try {
-                   //     docker.image(TOMCAT_IMAGE_NAME).withRun("-d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080") { c ->
+                 try {
+                       docker.image(TOMCAT_IMAGE_NAME).withRun("-d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080") { c ->
                             // Copy the artifact to the Tomcat container
-                     //       c.copyFile("${ARTIFACT_NAME}.war", "/usr/local/tomcat/webapps/${ARTIFACT_NAME}.war")
-                       // }
-                   // } catch (Exception e) {
-                     //   echo "Container ${TOMCAT_CONTAINER_NAME} does not exist. Creating a new one."
-                       // docker.image(TOMCAT_IMAGE_NAME).run("-d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080")
-                    docker.image(DOCKER_IMAGE_NAME).run("-d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080")
+                           c.copyFile("${ARTIFACT_NAME}.war", "/usr/local/tomcat/webapps/${ARTIFACT_NAME}.war")
+                     }
+                   } catch (Exception e) {
+                       echo "Container ${TOMCAT_CONTAINER_NAME} does not exist. Creating a new one."
+                       docker.image(TOMCAT_IMAGE_NAME).run("-d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080")
+                  
+                     //  docker.image(DOCKER_IMAGE_NAME).run("-d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080")
                 }
                 }
             }
         }
         }
-        //}
+        }
