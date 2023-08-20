@@ -34,7 +34,7 @@ environment {
             //}
         //}
         
-        stage('Publish to Artifactory') {
+        stage('Publish to Artifactory - configure') {
             steps {
                 rtMavenDeployer(
                     id: 'Jfrog', 
@@ -44,7 +44,7 @@ environment {
                 )
             }
         }
-        stage('Upload'){
+        stage('Upload the artifact'){
             steps{
                 rtUpload (
                  serverId:"Jfrog",
@@ -82,6 +82,52 @@ environment {
                 }
             }
         }
+
+        /*
+ stages {
+         stage('Build Docker Image and Run Container') {
+            steps {
+                script {
+                    def DOCKER_IMAGE_NAME = 'my-custom-tomcat'
+                    def DOCKERFILE_PATH = 'Dockerfile' // Path to your Dockerfile
+                    
+                    // Build the Docker image
+                    def dockerImage = docker.build(DOCKER_IMAGE_NAME, "-f ${DOCKERFILE_PATH} .")
+
+                    // Run the Docker container
+                    def TOMCAT_CONTAINER_NAME = 'my-tomcat-container'
+                    def ARTIFACT_NAME = 'my-app' // Adjust this to match your application's name
+
+                    dockerImage.run("-d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080")
+                }
+            }
+        }
+        */
+
+        /*
+
+        stages {
+        stage('Build Docker image') {
+           steps {
+                script {
+                  def dockerImage = docker.build("${ARTIFACT_NAME}:${env.BUILD_NUMBER}", "-f Dockerfile .")
+                    sh "docker save -o ${ARTIFACT_NAME}_${env.BUILD_NUMBER}.tar ${ARTIFACT_NAME}:${env.BUILD_NUMBER}"
+                    
+                    //  def dockerImage = docker.build("${ARTIFACT_NAME}:${env.BUILD_NUMBER}", "-f Dockerfile .")
+                   // sh "docker -H=${DOCKER_SERVER} save -o ${ARTIFACT_NAME}_${env.BUILD_NUMBER}.tar ${ARTIFACT_NAME}:${env.BUILD_NUMBER}"
+                }
+            }
+        }
+            stage('Deploy to Tomcat Container') {
+            steps {
+                script {
+                      docker.image(TOMCAT_IMAGE_NAME).run("-d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080 -v ${PWD}/${ARTIFACT_NAME}.war:/usr/local/tomcat/webapps/${ARTIFACT_NAME}.war")
+                    //sh "docker -H=${DOCKER_SERVER} run -d --name ${TOMCAT_CONTAINER_NAME} -p 8080:8080 -v ${PWD}/${ARTIFACT_NAME}.war:/usr/local/tomcat/webapps/${ARTIFACT_NAME}.war ${TOMCAT_IMAGE_NAME}"
+                }
+            }
+        }
+        */
+        
  stage('Build') {
             steps {
                 // Build your artifact here (e.g., compile, package)
