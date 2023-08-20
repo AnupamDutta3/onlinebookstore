@@ -19,13 +19,13 @@ environment {
                 checkout scm
             }
         }
-        
+    /*---------------------    
         stage('Build') {
             steps {
                 sh 'mvn clean install'
             }
         }
-        
+   --------------------------*/     
     //    stage('SonarQube Analysis') {
       //      steps {
          //       withSonarQubeEnv('SonarQube') {
