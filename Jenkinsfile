@@ -19,35 +19,6 @@ environment {
                 checkout scm
             }
         }
-       
-stage('Build') {
-            steps {
-                // Build your artifact here (e.g., compile, package)
-                sh 'mvn clean package'  
-            }
-        }
-        
-        stage('Build Docker Image') {
-            steps {
-                     sh "cp target/${ARTIFACT_NAME} ${ARTIFACT_NAME}"
-                //    sh "cp target/${ARTIFACT_NAME} docker-context/"
-                // Build a Docker image containing the WAR file
-                script {
-                    docker.build(DOCKER_IMAGE_NAME, '-f Dockerfile .')
-                }
-            }
-        }
-        
-        stage('Deploy to Tomcat Docker Container') {
-            steps {
-                // Run the Tomcat Docker container
-                sh "docker run -d -p 8080:8080 --name ${TOMCAT_CONTAINER_NAME} ${DOCKER_IMAGE_NAME}"
-                
-                // Copy the WAR file into the running container
-                sh "docker cp target/${ARTIFACT_NAME} ${TOMCAT_CONTAINER_NAME}:/usr/local/tomcat/webapps/"
-            }
-        }
-    }
     /*---------------------    
         stage('Build') {
             steps {
@@ -111,7 +82,13 @@ stage('Build') {
                 }
             }
         }
-        
+        stage('Build') {
+            steps {
+                // Build your artifact here (e.g., compile, package)
+                sh 'mvn clean package'  // Assuming Maven is used for building
+            }
+        }
+
         /*
  stages {
          stage('Build Docker Image and Run Container') {
@@ -157,7 +134,29 @@ stage('Build') {
         }
         */
         
-  
+ 
+        
+        stage('Build Docker Image') {
+            steps {
+                     sh "cp target/${ARTIFACT_NAME} ${ARTIFACT_NAME}"
+                //    sh "cp target/${ARTIFACT_NAME} docker-context/"
+                // Build a Docker image containing the WAR file
+                script {
+                    docker.build(DOCKER_IMAGE_NAME, '-f Dockerfile .')
+                }
+            }
+        }
+        
+        stage('Deploy to Tomcat Docker Container') {
+            steps {
+                // Run the Tomcat Docker container
+                sh "docker run -d -p 8080:8080 --name ${TOMCAT_CONTAINER_NAME} ${DOCKER_IMAGE_NAME}"
+                
+                // Copy the WAR file into the running container
+                sh "docker cp target/${ARTIFACT_NAME} ${TOMCAT_CONTAINER_NAME}:/usr/local/tomcat/webapps/"
+            }
+        }
+    }
 
         }
     
