@@ -81,6 +81,7 @@ environment {
                     sh 'mvn sonar:sonar -Dsonar.projectKey=onlinebookstore:onlinebookstore'
                 }
             }
+        }
  stage('Build') {
             steps {
                 // Build your artifact here (e.g., compile, package)
@@ -111,3 +112,4 @@ environment {
 
         }
     }
+    
