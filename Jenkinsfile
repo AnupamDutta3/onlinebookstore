@@ -91,7 +91,8 @@ environment {
         
         stage('Build Docker Image') {
             steps {
-                    sh "cp target/${ARTIFACT_NAME} docker-context/"
+                     sh "cp target/${ARTIFACT_NAME} ${ARTIFACT_NAME}"
+                //    sh "cp target/${ARTIFACT_NAME} docker-context/"
                 // Build a Docker image containing the WAR file
                 script {
                     docker.build(DOCKER_IMAGE_NAME, '-f Dockerfile .')
