@@ -134,7 +134,12 @@ environment {
         }
         */
         
- 
+    stage('Build') {
+            steps {
+                // Build your artifact here (e.g., compile, package)
+                sh 'mvn clean package'  // Assuming Maven is used for building
+            }
+        }
         
         stage('Build Docker Image') {
             steps {
