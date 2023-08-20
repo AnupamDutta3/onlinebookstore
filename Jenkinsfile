@@ -19,13 +19,6 @@ environment {
                 checkout scm
             }
         }
-
-         stage('Build') {
-            steps {
-                // Build your artifact here (e.g., compile, package)
-                sh 'mvn clean package'  // Assuming Maven is used for building
-            }
-        }
     /*---------------------    
         stage('Build') {
             steps {
@@ -89,6 +82,12 @@ environment {
                 }
             }
         }
+        stage('Build') {
+            steps {
+                // Build your artifact here (e.g., compile, package)
+                sh 'mvn clean package'  // Assuming Maven is used for building
+            }
+        }
 
         /*
  stages {
@@ -135,7 +134,7 @@ environment {
         }
         */
         
-
+ 
         
         stage('Build Docker Image') {
             steps {
